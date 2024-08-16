@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 1. Live Server Watching
+When you're working on your project using Vite, it has something called a live server. This live server is constantly checking your files, like main.css, for any changes. If you make a change to main.css, the live server automatically reloads the website in your browser so you can see your changes right away. The highlight in VS Code shows that the file is being actively watched for these changes.
+
+4. Build Process
+Tailwind CSS and Vite use a build process, which means your CSS is being processed by tools like PostCSS before it's sent to the browser. As part of this process, Vite continuously monitors main.css because it's being transformed behind the scenes. This is why the file might be highlighted—it's being actively used by these tools to generate the final CSS that will be applied to your website. */
+
+/* # Important Point:
+Yes, exactly! You're right.
+
+When you add @tailwind base;, @tailwind components;, and @tailwind utilities; in main.css, Vite (along with Tailwind and PostCSS) processes those directives and converts them into actual CSS rules that your website uses.
+
+Vite continuously checks main.css for any changes because it's responsible for ensuring that the CSS is properly generated and up-to-date. That's why main.css is highlighted—it is being watched and actively processed by Vite to make sure the correct CSS is being applied to your site.
+
+Great understanding! */
+
+/* # Why Vite is so fast live server?
+Vite's Hot Module Replacement (HMR) is able to detect which part of your code is updated using a clever mechanism built into the development server. Here's how it works:
+
+1. File Watchers
+Monitoring Changes: Vite uses file watchers (typically based on a tool like chokidar) to monitor the files in your project. These watchers listen for changes to files (like when you save changes in main.css or a JavaScript file).
+2. Module Dependency Graph
+Tracking Dependencies: Vite maintains a module dependency graph, which is essentially a map of how all the files (modules) in your project are connected to each other. When a file changes, Vite knows exactly which other modules (files) depend on it.
+For example:
+
+If you update main.css, Vite knows which HTML or JavaScript files import this CSS, and it can trigger an update only for those specific parts of the application.
+3. HMR Communication
+Sending Changes to the Browser: When a file is updated, Vite doesn't reload the entire page. Instead, it sends a small WebSocket message to the browser, informing it that a specific file has changed. This WebSocket connection is set up when you run the development server, and it keeps the browser in sync with the server.
+4. Replacing Only the Updated Module
+Reloading the Changed Parts: Once the browser receives the WebSocket message, it knows which specific module (file) has changed and reloads only that part of the application. For example:
+If you change a CSS file, Vite injects the new styles directly into the page without refreshing the entire page.
+If you change a JavaScript file, Vite reloads that specific module and any modules that depend on it.
+Example of the Process:
+You edit and save a file (like main.css).
+Vite's file watcher detects the change.
+Vite sends a WebSocket message to the browser indicating that main.css has changed.
+The browser receives the message and updates only the styles related to main.css without refreshing the whole page. */
